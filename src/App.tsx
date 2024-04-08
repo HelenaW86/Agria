@@ -1,9 +1,8 @@
+import { RandomUserCard } from "./components/RandomUserCard"
+
 function App() {
  return (
-    <>
-      <h1>Agria❤️</h1>
-    </>
+    <RandomUserCard/>
   )
 }
-
 export default App
