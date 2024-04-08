@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { ProfileImage } from "./ProfileImage";
+import { ProfileName } from "./ProfileName";
+import { ProfileEmail } from "./ProfileEmail";
+import { ProfilePhoneNumber } from "./ProfilePhoneNumber";
 
-interface UserData {
+interface IUserData {
   name: {
     first: string;
     last: string;
@@ -9,12 +13,12 @@ interface UserData {
   email: string;
   gender: string;
   picture: {
-    medium: string;
+    large: string;
   };
 }
 export const RandomUserCard = () => {
   const URL = "https://randomuser.me/api/";
-  const [, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState<IUserData | null>(null);
   const fetchRandomUser = async () => {
     try {
       const response = await fetch(URL);
@@ -31,7 +35,12 @@ export const RandomUserCard = () => {
 
   return (
     <>
-      <h1>Agria❤️</h1>
+      {userData ? <section>
+        <ProfileImage src={userData.picture.large} alt={userData.name.first}/>
+        <ProfileName firstName={userData.name.first} lastName={userData.name.last}/>
+        <ProfileEmail email={userData.email}/>
+        <ProfilePhoneNumber number={userData.phone}/>
+      </section> : <></>}
     </>
   );
 };
