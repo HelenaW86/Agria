@@ -19,14 +19,23 @@ interface IUserData {
 export const RandomUserCard = () => {
   const URL = "https://randomuser.me/api/";
   const [userData, setUserData] = useState<IUserData | null>(null);
+  const [error, setError] = useState<string | null | unknown >(null);
   const fetchRandomUser = async () => {
     try {
       const response = await fetch(URL);
+      if (!response.ok) {
+        // Throw an error if response is not ok
+        throw new Error('Failed to fetch user data');
+      }
       const data = await response.json();
       // Set the fetched user data in state
       setUserData(data.results[0]);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     }
   };
   useEffect(() => {
@@ -40,7 +49,9 @@ export const RandomUserCard = () => {
         <ProfileName firstName={userData.name.first} lastName={userData.name.last}/>
         <ProfileEmail email={userData.email}/>
         <ProfilePhoneNumber number={userData.phone}/>
+
       </section> : <></>}
+   {error ? error : <></>}
     </>
   );
 };
