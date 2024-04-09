@@ -5,6 +5,7 @@ import { ProfileEmail } from "./ProfileEmail";
 import { ProfilePhoneNumber } from "./ProfilePhoneNumber";
 import { ContentDiv, SectionCard } from "../styles/StyleUserCard";
 import { GetNewRandomUser } from "./GetNewRandomUser";
+import { Loader } from "./Loader";
 
 interface IUserData {
   name: {
@@ -22,8 +23,10 @@ export const RandomUserCard = () => {
   const URL = "https://randomuser.me/api/";
   const [userData, setUserData] = useState<IUserData | null>(null);
   const [error, setError] = useState<string | null | unknown>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const fetchRandomUser = async () => {
     try {
+      setIsLoading(true);
       const response = await fetch(URL);
       if (!response.ok) {
         // Throw an error if response is not ok
@@ -38,6 +41,9 @@ export const RandomUserCard = () => {
       } else {
         setError("An unknown error occurred");
       }
+    } finally {
+      // Set loading state to false
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -46,6 +52,7 @@ export const RandomUserCard = () => {
 
   return (
     <>
+    {isLoading && <Loader/>}
       {userData ? (
         <SectionCard>
           <ProfileImage

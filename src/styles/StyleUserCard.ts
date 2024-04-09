@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { device } from "./DeviceMediaQuery";
 
 export const SectionCard = styled.section`
-position: relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -62,13 +62,40 @@ export const NewUserButton = styled.button`
   padding: 5px 10px;
   font-size: 17px;
   border-radius: 7px;
+  animation: fall 4s;
+  animation-delay: 0.3s;
+  margin-top: 50px;
   @media ${device.laptop} {
     position: absolute;
-    right: 40px;;
+    right: 40px;
+    margin-top: 0;
+  }
+
+  @keyframes fall {
+    from {
+      top: 0px;
+    }
+    to {
+      top: 245px;
+    }
   }
   &:hover {
     color: #f4f5f3;
     background: rgba(41, 41, 41, 0.87);
     border: 1px solid rgba(41, 41, 41, 0.87);
   }
+`;
+export const LoaderDiv = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  color: white;
+`;
+export const LoaderImg = styled.img`
+width: 80px;
+height: 80px;
+margin: auto;
 `;
