@@ -3,6 +3,7 @@ import { ProfileImage } from "./ProfileImage";
 import { ProfileName } from "./ProfileName";
 import { ProfileEmail } from "./ProfileEmail";
 import { ProfilePhoneNumber } from "./ProfilePhoneNumber";
+import { ContentDiv, SectionCard } from "../styles/StyleUserCard";
 
 interface IUserData {
   name: {
@@ -44,13 +45,15 @@ export const RandomUserCard = () => {
 
   return (
     <>
-      {userData ? <section>
+      {userData ? <SectionCard>
         <ProfileImage src={userData.picture.large} alt={userData.name.first}/>
+        <ContentDiv>
         <ProfileName firstName={userData.name.first} lastName={userData.name.last}/>
         <ProfileEmail email={userData.email}/>
         <ProfilePhoneNumber number={userData.phone}/>
+        </ContentDiv>
 
-      </section> : <></>}
+      </SectionCard> : <></>}
    {error ? error : <></>}
     </>
   );

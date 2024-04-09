@@ -1,8 +1,11 @@
-import { RandomUserCard } from "./components/RandomUserCard"
+import { RandomUserCard } from "./components/RandomUserCard";
+import { Wrapper } from "./styles/StyleMain";
 
 function App() {
- return (
-    <RandomUserCard/>
-  )
+  return (
+    <Wrapper>
+      <RandomUserCard />
+    </Wrapper>
+  );
 }
-export default App
+export default App;
