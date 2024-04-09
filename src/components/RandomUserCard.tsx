@@ -4,6 +4,7 @@ import { ProfileName } from "./ProfileName";
 import { ProfileEmail } from "./ProfileEmail";
 import { ProfilePhoneNumber } from "./ProfilePhoneNumber";
 import { ContentDiv, SectionCard } from "../styles/StyleUserCard";
+import { GetNewRandomUser } from "./GetNewRandomUser";
 
 interface IUserData {
   name: {
@@ -20,13 +21,13 @@ interface IUserData {
 export const RandomUserCard = () => {
   const URL = "https://randomuser.me/api/";
   const [userData, setUserData] = useState<IUserData | null>(null);
-  const [error, setError] = useState<string | null | unknown >(null);
+  const [error, setError] = useState<string | null | unknown>(null);
   const fetchRandomUser = async () => {
     try {
       const response = await fetch(URL);
       if (!response.ok) {
         // Throw an error if response is not ok
-        throw new Error('Failed to fetch user data');
+        throw new Error("Failed to fetch user data");
       }
       const data = await response.json();
       // Set the fetched user data in state
@@ -35,7 +36,7 @@ export const RandomUserCard = () => {
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError('An unknown error occurred');
+        setError("An unknown error occurred");
       }
     }
   };
@@ -45,16 +46,27 @@ export const RandomUserCard = () => {
 
   return (
     <>
-      {userData ? <SectionCard>
-        <ProfileImage src={userData.picture.large} alt={userData.name.first}/>
-        <ContentDiv>
-        <ProfileName firstName={userData.name.first} lastName={userData.name.last}/>
-        <ProfileEmail email={userData.email}/>
-        <ProfilePhoneNumber number={userData.phone}/>
-        </ContentDiv>
-
-      </SectionCard> : <></>}
-   {error ? error : <></>}
+      {userData ? (
+        <SectionCard>
+          <ProfileImage
+            src={userData.picture.large}
+            alt={userData.name.first}
+          />
+          <ContentDiv>
+            <ProfileName
+              firstName={userData.name.first}
+              lastName={userData.name.last}
+            />
+            <ProfileEmail email={userData.email} />
+            <ProfilePhoneNumber number={userData.phone} />
+            <GetNewRandomUser fetch={() => fetchRandomUser()} />
+          </ContentDiv>
+   
+        </SectionCard>
+      ) : (
+        <></>
+      )}
+      {error ? error : <></>}
     </>
   );
 };

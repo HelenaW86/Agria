@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { device } from "./DeviceMediaQuery";
 
 export const SectionCard = styled.section`
+position: relative;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -10,7 +11,7 @@ export const SectionCard = styled.section`
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 7px;
-  background: #FEFFFD;
+  background: #fefffd;
   font-size: 17px;
   @media ${device.laptop} {
     flex-direction: row;
@@ -26,7 +27,7 @@ export const UserImg = styled.div<{ src: string }>`
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 100%;
-  border: 7px solid #CACBC9;
+  border: 7px solid #cacbc9;
   margin: auto;
   @media ${device.laptop} {
     width: 220px;
@@ -50,7 +51,24 @@ export const Name = styled.h1`
   }
 `;
 export const Icon = styled.img`
-width: 17px;
-margin-right: 5px;
-
+  width: 17px;
+  margin-right: 5px;
+`;
+export const NewUserButton = styled.button`
+  cursor: pointer;
+  background: #f4f5f3;
+  border: 1px solid rgba(41, 41, 41, 0.87);
+  color: rgba(41, 41, 41, 0.87);
+  padding: 5px 10px;
+  font-size: 17px;
+  border-radius: 7px;
+  @media ${device.laptop} {
+    position: absolute;
+    right: 40px;;
+  }
+  &:hover {
+    color: #f4f5f3;
+    background: rgba(41, 41, 41, 0.87);
+    border: 1px solid rgba(41, 41, 41, 0.87);
+  }
 `;
